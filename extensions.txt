@@ -19,6 +19,3 @@ leetcode.vscode-leetcode
 usernamehw.errorlens
 adpyke.codesnap
 eamodio.gitlens
-bierner.markdown-mermaid
-bierner.markdown-preview-github-styles
-shd101wyy.markdown-preview-enhanced

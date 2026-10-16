@@ -1003,13 +1003,13 @@
   "window.commandCenter": false,
   "workbench.tree.enableStickyScroll": false,
   "workbench.iconTheme": "vs-nomo-dark",
+  "workbench.productIconTheme": "adwaita",
   "vscode_custom_css.imports": [
     "file://{{HOME}}/.vscode/custom.css",
     "file://{{HOME}}/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.9/dist/updateHandler.js"
   ],
   "workbench.colorTheme": "Transparent Color Theme",
   "lldb.suppressUpdateNotifications": true,
-  "workbench.productIconTheme": "adwaita",
   "leetcode.hint.commandShortcut": false,
   "editor.overviewRulerBorder": false,
   "editor.hideCursorInOverviewRuler": true,
