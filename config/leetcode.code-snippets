@@ -1,0 +1,466 @@
+{
+    "Fast I/O": {
+        "scope": "cpp",
+        "prefix": [
+            "fio",
+            "fastio"
+        ],
+        "body": [
+            "ios_base::sync_with_stdio(false);",
+            "cin.tie(NULL);"
+        ],
+        "description": "Fast I/O for Competitive Programming & LeetCode"
+    },
+    "4 Directions (Matrix BFS/DFS)": {
+        "scope": "cpp",
+        "prefix": [
+            "dirs",
+            "dirs4"
+        ],
+        "body": [
+            "const vector<pair<int, int>> dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};"
+        ],
+        "description": "4 directions vector for 2D Grid traversal (Up, Down, Left, Right)"
+    },
+    "8 Directions (Matrix)": {
+        "scope": "cpp",
+        "prefix": [
+            "dirs8"
+        ],
+        "body": [
+            "const vector<pair<int, int>> dirs8 = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};"
+        ],
+        "description": "8 directions vector for 2D Grid traversal"
+    },
+    "Check In Bounds (Lambda)": {
+        "scope": "cpp",
+        "prefix": [
+            "isvalid",
+            "inbounds"
+        ],
+        "body": [
+            "auto isValid = [&](int r, int c) {",
+            "    return r >= 0 && r < ${1:m} && c >= 0 && c < ${2:n};",
+            "};"
+        ],
+        "description": "Lambda to check if (r, c) is inside matrix"
+    },
+    "Debug Print Vector": {
+        "scope": "cpp",
+        "prefix": [
+            "dbg",
+            "printv",
+            "dbgvec"
+        ],
+        "body": [
+            "for (const auto& ${1:x} : ${2:vec}) {",
+            "    cout << ${1:x} << \" \";",
+            "}",
+            "cout << \"\\n\";"
+        ],
+        "description": "Print elements of a vector or container"
+    },
+    "Debug Print Map": {
+        "scope": "cpp",
+        "prefix": [
+            "dbgmap",
+            "printm"
+        ],
+        "body": [
+            "for (const auto& [${1:k}, ${2:v}] : ${3:mp}) {",
+            "    cout << ${1:k} << \": \" << ${2:v} << \"\\n\";",
+            "}"
+        ],
+        "description": "Print key-value pairs of a map/hash table"
+    },
+    "For Loop i": {
+        "scope": "cpp",
+        "prefix": [
+            "fori",
+            "loop"
+        ],
+        "body": [
+            "for (int ${1:i} = 0; ${1:i} < ${2:n}; ++${1:i}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "0 to n standard loop"
+    },
+    "For Loop j (Nested)": {
+        "scope": "cpp",
+        "prefix": [
+            "forj"
+        ],
+        "body": [
+            "for (int ${1:j} = 0; ${1:j} < ${2:m}; ++${1:j}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "0 to m nested loop"
+    },
+    "Range-based For Loop": {
+        "scope": "cpp",
+        "prefix": [
+            "forr"
+        ],
+        "body": [
+            "for (const auto& ${1:x} : ${2:container}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Range-based for loop"
+    },
+    "Binary Search Template": {
+        "scope": "cpp",
+        "prefix": [
+            "bs",
+            "binsearch"
+        ],
+        "body": [
+            "int ${1:left} = ${2:0}, ${3:right} = ${4:n - 1};",
+            "while (${1:left} <= ${3:right}) {",
+            "    int ${5:mid} = ${1:left} + (${3:right} - ${1:left}) / 2;",
+            "    if (${6:${7:nums}[${5:mid}] == ${8:target}}) {",
+            "        $0",
+            "    } else if (${7:nums}[${5:mid}] < ${8:target}) {",
+            "        ${1:left} = ${5:mid} + 1;",
+            "    } else {",
+            "        ${3:right} = ${5:mid} - 1;",
+            "    }",
+            "}"
+        ],
+        "description": "Standard Binary Search template"
+    },
+    "Min Heap Priority Queue": {
+        "scope": "cpp",
+        "prefix": [
+            "pqmin",
+            "minheap"
+        ],
+        "body": [
+            "priority_queue<${1:int}, vector<${1:int}>, greater<${1:int}>> ${2:minHeap};"
+        ],
+        "description": "Min-heap priority_queue"
+    },
+    "Max Heap Priority Queue": {
+        "scope": "cpp",
+        "prefix": [
+            "pqmax",
+            "maxheap"
+        ],
+        "body": [
+            "priority_queue<${1:int}> ${2:maxHeap};"
+        ],
+        "description": "Max-heap priority_queue"
+    },
+    "DSU / Union-Find": {
+        "scope": "cpp",
+        "prefix": [
+            "dsu",
+            "unionfind"
+        ],
+        "body": [
+            "struct DSU {",
+            "    vector<int> parent, rank;",
+            "    DSU(int n) : parent(n), rank(n, 0) {",
+            "        iota(parent.begin(), parent.end(), 0);",
+            "    }",
+            "    int find(int x) {",
+            "        if (parent[x] != x) parent[x] = find(parent[x]);",
+            "        return parent[x];",
+            "    }",
+            "    bool unite(int x, int y) {",
+            "        int rx = find(x), ry = find(y);",
+            "        if (rx == ry) return false;",
+            "        if (rank[rx] < rank[ry]) swap(rx, ry);",
+            "        parent[ry] = rx;",
+            "        if (rank[rx] == rank[ry]) rank[rx]++;",
+            "        return true;",
+            "    }",
+            "    bool connected(int x, int y) {",
+            "        return find(x) == find(y);",
+            "    }",
+            "};"
+        ],
+        "description": "Disjoint Set Union (DSU) / Union-Find with rank & path compression"
+    },
+    "Binary Exponentiation (Pow Mod)": {
+        "scope": "cpp",
+        "prefix": [
+            "powmod",
+            "binpow"
+        ],
+        "body": [
+            "long long power(long long base, long long exp, long long mod = 1e9 + 7) {",
+            "    long long res = 1;",
+            "    base %= mod;",
+            "    while (exp > 0) {",
+            "        if (exp & 1) res = (res * base) % mod;",
+            "        base = (base * base) % mod;",
+            "        exp >>= 1;",
+            "    }",
+            "    return res;",
+            "}"
+        ],
+        "description": "Fast power modulo (base^exp % mod)"
+    },
+    "GCD & LCM": {
+        "scope": "cpp",
+        "prefix": [
+            "gcdlcm",
+            "gcd"
+        ],
+        "body": [
+            "long long gcd(long long a, long long b) {",
+            "    return b == 0 ? a : gcd(b, a % b);",
+            "}",
+            "long long lcm(long long a, long long b) {",
+            "    return (a / gcd(a, b)) * b;",
+            "}"
+        ],
+        "description": "GCD and LCM functions"
+    },
+    "String Rolling Hash": {
+        "scope": "cpp",
+        "prefix": [
+            "hash",
+            "strhash",
+            "rollinghash"
+        ],
+        "body": [
+            "struct StringHash {",
+            "    const long long MOD = 1e9 + 7;",
+            "    const long long BASE = 313;",
+            "    vector<long long> h, p;",
+            "",
+            "    StringHash(const string& s) {",
+            "        int n = s.size();",
+            "        h.assign(n + 1, 0);",
+            "        p.assign(n + 1, 1);",
+            "        for (int i = 0; i < n; ++i) {",
+            "            h[i + 1] = (h[i] * BASE + s[i]) % MOD;",
+            "            p[i + 1] = (p[i] * BASE) % MOD;",
+            "        }",
+            "    }",
+            "",
+            "    long long get(int l, int r) {",
+            "        long long res = (h[r + 1] - h[l] * p[r - l + 1]) % MOD;",
+            "        return (res + MOD) % MOD;",
+            "    }",
+            "};"
+        ],
+        "description": "Polynomial Rolling Hash for strings (O(1) substring hash queries)"
+    },
+    "Pair Hash for Unordered Map": {
+        "scope": "cpp",
+        "prefix": [
+            "pairhash",
+            "hashpair"
+        ],
+        "body": [
+            "struct pair_hash {",
+            "    template <class T1, class T2>",
+            "    size_t operator()(const pair<T1, T2>& p) const {",
+            "        auto h1 = hash<T1>{}(p.first);",
+            "        auto h2 = hash<T2>{}(p.second);",
+            "        return h1 ^ (h2 + 0x9e3779b9 + (h1 << 6) + (h1 >> 2));",
+            "    }",
+            "};"
+        ],
+        "description": "Custom hash for std::pair to use in unordered_map or unordered_set"
+    },
+    "Safe Hash (Anti-Collision)": {
+        "scope": "cpp",
+        "prefix": [
+            "safehash",
+            "customhash"
+        ],
+        "body": [
+            "struct custom_hash {",
+            "    static uint64_t splitmix64(uint64_t x) {",
+            "        x += 0x9e3779b97f4a7c15;",
+            "        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;",
+            "        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;",
+            "        return x ^ (x >> 31);",
+            "    }",
+            "",
+            "    size_t operator()(uint64_t x) const {",
+            "        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();",
+            "        return splitmix64(x + FIXED_RANDOM);",
+            "    }",
+            "};"
+        ],
+        "description": "Anti-collision splitmix64 hash for unordered_map<long long, int, custom_hash>"
+    },
+    "LeetCode Local Main Test Case": {
+        "scope": "cpp",
+        "prefix": [
+            "lcmain",
+            "solmain",
+            "debugmain"
+        ],
+        "body": [
+            "",
+            "#ifdef LOCAL",
+            "int main() {",
+            "    Solution sol;",
+            "    $0",
+            "    return 0;",
+            "}",
+            "#endif"
+        ],
+        "description": "Khung main() cục bộ để chạy test case & debug bằng F5 / Code Runner"
+    },
+    "LeetCode Test Binary Tree": {
+        "scope": "cpp",
+        "prefix": [
+            "lctree",
+            "tree",
+            "testtree"
+        ],
+        "body": [
+            "TreeNode* root = createTree({${1:3, 9, 20, null, null, 15, 7}});",
+            "printTree(root);",
+            "auto ans = sol.${2:maxDepth}(root);",
+            "dbg(ans);"
+        ],
+        "description": "Tạo nhanh Binary Tree (TreeNode) chuẩn LeetCode BFS và in ASCII cây trực quan"
+    },
+    "LeetCode Test Linked List": {
+        "scope": "cpp",
+        "prefix": [
+            "lclist",
+            "testlist"
+        ],
+        "body": [
+            "ListNode* head = createList({${1:1, 2, 3, 4, 5}});",
+            "printList(head);",
+            "auto ans = sol.${2:reverseList}(head);",
+            "printList(ans);"
+        ],
+        "description": "Tạo Linked List từ vector & in danh sách"
+    },
+    "LeetCode Benchmark Timer": {
+        "scope": "cpp",
+        "prefix": [
+            "lctime",
+            "timer"
+        ],
+        "body": [
+            "LC_TIMER_START;",
+            "$0",
+            "LC_TIMER_END;"
+        ],
+        "description": "Đo thời gian thực thi giải thuật theo micro giây (µs)"
+    },
+    "LeetCode Test Singly Linked List": {
+        "scope": "cpp",
+        "prefix": [
+            "lclist",
+            "sll",
+            "testlist"
+        ],
+        "body": [
+            "ListNode* head = createList({${1:1, 2, 3, 4, 5}});",
+            "printList(head);",
+            "auto ans = sol.${2:functionName}(head);",
+            "printList(ans);"
+        ],
+        "description": "Tạo nhanh Singly Linked List (ListNode) từ vector và in kết quả"
+    },
+    "LeetCode Test Doubly Linked List": {
+        "scope": "cpp",
+        "prefix": [
+            "lcdlist",
+            "dll",
+            "testdlist"
+        ],
+        "body": [
+            "DListNode* head = createDList({${1:1, 2, 3, 4, 5}});",
+            "printDList(head);",
+            "auto ans = sol.${2:functionName}(head);",
+            "printDList(ans);"
+        ],
+        "description": "Tạo nhanh Doubly Linked List (DListNode / prev-next) và in kết quả"
+    },
+    "LeetCode Test Binary Search Tree": {
+        "scope": "cpp",
+        "prefix": [
+            "lcbst",
+            "bst",
+            "testbst"
+        ],
+        "body": [
+            "TreeNode* root = createBST({${1:4, 2, 7, 1, 3}});",
+            "printTree(root);",
+            "auto ans = sol.${2:searchBST}(root, ${3:2});",
+            "printTree(ans);"
+        ],
+        "description": "Tạo nhanh Binary Search Tree (BST) tự động chèn node và in cây"
+    },
+    "LeetCode Test 2D Grid / Matrix": {
+        "scope": "cpp",
+        "prefix": [
+            "lcgrid",
+            "grid",
+            "matrix"
+        ],
+        "body": [
+            "vector<vector<int>> grid = {",
+            "    ${1:{1, 3, 1},",
+            "    {1, 5, 1},",
+            "    {4, 2, 1}}",
+            "};",
+            "printGrid(grid);",
+            "auto ans = sol.${2:minPathSum}(grid);",
+            "dbg(ans);"
+        ],
+        "description": "Tạo nhanh 2D Grid / Matrix và in bảng cân chỉnh đẹp"
+    },
+    "LeetCode Test Graph Adjacency List": {
+        "scope": "cpp",
+        "prefix": [
+            "lcgraph",
+            "graph",
+            "edges"
+        ],
+        "body": [
+            "int n = ${1:4};",
+            "vector<vector<int>> edges = {${2:{0, 1}, {1, 2}, {2, 3}}};",
+            "vector<vector<int>> adj(n);",
+            "for (const auto& e : edges) {",
+            "    adj[e[0]].push_back(e[1]);",
+            "    adj[e[1]].push_back(e[0]);",
+            "}",
+            "dbg(adj);"
+        ],
+        "description": "Tạo nhanh danh sách kề (Adjacency List) đồ thị từ danh sách cạnh edges"
+    },
+    "LeetCode Test Vector Array": {
+        "scope": "cpp",
+        "prefix": [
+            "lcvec",
+            "nums",
+            "testvec"
+        ],
+        "body": [
+            "vector<int> nums = {${1:2, 7, 11, 15}};",
+            "int target = ${2:9};",
+            "auto ans = sol.${3:twoSum}(nums, target);",
+            "dbg(ans);"
+        ],
+        "description": "Tạo mảng vector test case"
+    },
+    "LeetCode Free Memory Helper": {
+        "scope": "cpp",
+        "prefix": [
+            "lcfree",
+            "cleanmem"
+        ],
+        "body": [
+            "freeList(${1:head});",
+            "freeTree(${2:root});"
+        ],
+        "description": "Giải phóng bộ nhớ danh sách liên kết hoặc cây nhị phân"
+    }
+}
