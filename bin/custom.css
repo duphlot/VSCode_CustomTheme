@@ -1,117 +1,256 @@
-/* Side bar */
-.part.sidebar {
-    box-shadow: 0px 0px 50px rgba(0, 0, 0, .25);
+/* ==========================================================================
+   VS CODE CUSTOM STYLESHEET - JETBRAINS MONO & MACOS VIBRANCY POLISH
+   ========================================================================== */
+
+/* 1. SIDEBAR & EXPLORER FONT & LARGER SIZE */
+.monaco-workbench .part.sidebar .monaco-list-row .label-name,
+.monaco-workbench .part.sidebar .monaco-list-row .monaco-icon-label .label-description,
+.monaco-workbench .part.sidebar .pane-header .title,
+.monaco-workbench .part.sidebar .composite.title .title-label h2 {
+  font-family: 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  font-feature-settings: 'calt' 1, 'liga' 1;
 }
 
-/* File Explorer Selected Item */
-.monaco-list.list_id_1 .monaco-list-row.selected {
-    background-color: #4f5971 !important;
-    opacity: 1 !important;
-    border-top: 1px #727b90 solid;
-    border-bottom: 1px #727b90 solid;
+/* 2. PROTECT ALL ICONS - PREVENT BOX GLYPHS */
+.monaco-workbench [class*="codicon"],
+.monaco-workbench .codicon,
+.monaco-workbench .action-label,
+.monaco-workbench .actions-container *,
+.monaco-workbench .monaco-action-bar *,
+.monaco-workbench .file-icon,
+.monaco-workbench .folder-icon,
+.monaco-workbench .monaco-custom-checkbox {
+  font-family: codicon !important;
 }
 
-
-/* List item label name */
-.monaco-list.list_id_1 .monaco-list-row.selected .label-name {
-    color: #fff !important;
-    opacity: 1 !important;
+/* 3. MODERN PILL-SHAPED EXPLORER ROW SELECTION */
+.monaco-workbench .part.sidebar .monaco-list-row {
+  border-radius: 6px !important;
+  margin: 1px 4px !important;
+  width: calc(100% - 8px) !important;
+  transition: background-color 0.15s ease, transform 0.1s ease !important;
 }
 
-/* File explorer action buttons */
-.monaco-workbench .part.sidebar .title-actions .actions-container {
-    display: none;
+/* 4. SLIM SMOOTH SCROLLBAR */
+.scrollbar > .slider {
+  border-radius: 4px !important;
 }
 
-
-
-/* File Explorer Item Label */
-.monaco-tree .monaco-tree-row .label-name,
-.monaco-list .monaco-list-row
-.monaco-icon-label .label-name {
-    font-family: 'Geist Mono', monospace !important;
-    font-size: 14px !important;
-    font-weight: 400 !important;
-}
-
-/* Sidebar top shadow */
-.monaco-scrollable-element>.shadow.top {
-    box-shadow: 0px 0px 10px rgba(0,0,0,.75) !important;
-    top: -3px !important;
-}
-
-/* Sidebar title */
-.composite.title {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-items: center !important;
-}
-.composite.title h2 {
-    font-weight: bold !important;
-    font-size: 12px !important;
-    text-transform: uppercase;
-}
-
-.composite.title h2::before {
-    display: inline-block;
-    margin-right: 6px; 
-    font-size: 1.1rem;
-    content: '🚀';
-}
-
-/* Project Title */
-.titlebar-left {
-    justify-content: flex-start !important;
-    flex-grow: 0 !important;
-    width: auto !important;
-}
-
-.codicon-toolbar-more, .codicon-word-wrap {
-    display: block !important;
-}
-
-.monaco-editor-hover,
+/* 5. SEAMLESS UNIFIED HOVER CARD (NO NESTED FRAMES) */
+.static-tooltip,
 .monaco-hover {
-    box-shadow: 0px 8px 32px rgba(0,0,0,.45) !important;
-    padding: 5px !important;
-    backdrop-filter: blur(3px) !important;
-    border-radius: 20px !important;
-    border: none !important
-}
-.quick-input-widget {
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, .45) !important;
-    padding: 10px 10px 18px 10px !important;
-    backdrop-filter: blur(3px) !important;
-    border-radius: 20px !important;
+  background: rgba(16, 22, 28, 0.88) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  overflow: hidden !important;
 }
 
-
-/* Remove background for lists */
-.monaco-list-rows {
-    background: transparent !important;
+.monaco-hover .hover-contents {
+  padding: 10px 14px !important;
 }
 
-/* List hover */
-.monaco-list-row:hover {
-    background: rgba(0, 0, 0, .2) !important;
+/* Eliminate all nested boxes/borders inside hover card */
+.monaco-hover .hover-contents .code,
+.monaco-hover .hover-contents code,
+.monaco-hover .hover-contents pre {
+  font-family: 'JetBrains Mono', Menlo, Monaco, monospace !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  line-height: 1.5 !important;
 }
 
-.notifications-toasts .monaco-list-row:hover {
-    background: none !important;
+.monaco-hover hr {
+  border: none !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  margin: 8px 0 !important;
 }
 
-.quick-input-filter .monaco-inputbox {
-    font-family: 'Geist Mono', monospace !important;
+.monaco-hover a {
+  color: #59c2ff !important;
+  text-decoration: none !important;
 }
 
-#command-blur {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, .15);
-    top: 0;
-    left: 0;
-    backdrop-filter: blur(8px);
+.monaco-hover a:hover {
+  text-decoration: underline !important;
 }
 
+.monaco-hover img {
+  border-radius: 50% !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  vertical-align: middle !important;
+}
+
+/* 6. NEON CARET GLOW */
+/* 6. SNAPPY SMOOTH CARET ANIMATION (FAST & BUTTERY SMOOTH) */
+.monaco-editor .cursors-layer.cursor-smooth-caret-animation > .cursor {
+  transition: all 45ms cubic-bezier(0.15, 0.85, 0.35, 1) !important;
+}
+
+/* Status bar restored to normal */
+
+/* 9. ACTIVE TAB ACCENT GLOW */
+.tab.active {
+  box-shadow: inset 0 2px 8px rgba(89, 194, 255, 0.25) !important;
+}
+
+/* 10. GLOWING ACCENT ON CURRENT LINE */
+.monaco-editor .view-overlays .current-line {
+  border: none !important;
+  background: linear-gradient(90deg, rgba(89, 194, 255, 0.07) 0%, rgba(89, 194, 255, 0.01) 40%, transparent 100%) !important;
+  border-radius: 4px !important;
+}
+.monaco-editor .margin-view-overlays .current-line-margin {
+  border-left: none !important;
+}
+
+/* 11. ACTIVE LINE NUMBER HIGHLIGHT & DIMMED GUTTER */
+.monaco-editor .line-numbers {
+  opacity: 0.55;
+}
+.monaco-editor .line-numbers.active-line-number {
+  opacity: 1 !important;
+  color: #59c2ff !important;
+  font-weight: 700 !important;
+}
+
+/* 12. RADIANT UNDERLINE ON ACTIVE TAB */
+.tab.active {
+  position: relative !important;
+  overflow: visible !important;
+}
+.tab.active::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 10% !important;
+  width: 80% !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent, #59c2ff, transparent) !important;
+  box-shadow: 0 0 8px rgba(89, 194, 255, 0.6) !important;
+  border-radius: 2px !important;
+}
+
+/* 13. SMOOTH ROTATION ON TREE ARROWS */
+.monaco-tl-twistie {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* 14. FROSTED GLASS NOTIFICATION CARDS */
+.notifications-toasts .notification-toast {
+  background: rgba(18, 24, 30, 0.85) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 15. GLASS BREADCRUMBS */
+.monaco-breadcrumbs {
+  background: transparent !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 13px !important;
+  opacity: 0.85 !important;
+}
+
+/* 16. MACOS TRAFFIC LIGHTS INSET & ALIGNMENT */
+.monaco-workbench .part.titlebar .window-controls-container {
+  padding-left: 12px !important;
+  margin-right: 8px !important;
+}
+
+/* 17. COMPACT MACBOOK TABS & APPLE-STYLE ROUNDED CORNERS */
+.tabs-container {
+  padding-left: 4px !important;
+}
+.tab {
+  border-radius: 6px 6px 0 0 !important;
+  margin-right: 2px !important;
+  font-family: 'JetBrains Mono', Menlo, Monaco, monospace !important;
+  font-size: 13px !important;
+}
+
+/* 18. SLIM MACOS FLOATING SCROLLBAR */
+.monaco-scrollable-element > .scrollbar > .slider {
+  border-radius: 10px !important;
+  transition: opacity 0.2s ease, background-color 0.2s ease !important;
+}
+
+/* 19. SEAMLESS GLASS PANEL SEPARATORS */
+.monaco-workbench .part.sidebar {
+  border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+.monaco-workbench .part.editor {
+  border-left: none !important;
+}
+
+/* ==========================================================================
+   20. ULTRA-CLEAN & COMPACT CONTEXT MENU (HIDE CLUTTER)
+   ========================================================================== */
+.monaco-menu .action-item:has([aria-label*="Go to Declaration"]),
+.monaco-menu .action-item:has([aria-label*="Go to Type Definition"]),
+.monaco-menu .action-item:has([aria-label*="Go to Implementations"]),
+.monaco-menu .action-item:has([aria-label*="Find All Implementations"]),
+.monaco-menu .action-item:has([aria-label*="Show Call Hierarchy"]),
+.monaco-menu .action-item:has([aria-label*="Show Type Hierarchy"]),
+.monaco-menu .action-item:has([aria-label*="Peek"]),
+.monaco-menu .action-item:has([aria-label*="Generate Docstring"]),
+.monaco-menu .action-item:has([aria-label*="Change All Occurrences"]),
+.monaco-menu .action-item:has([aria-label*="Open Changes"]),
+.monaco-menu .action-item:has([aria-label*="Open on Remote"]),
+.monaco-menu .action-item:has([aria-label*="File Annotations"]),
+.monaco-menu .action-item:has([aria-label*="File History"]),
+.monaco-menu .action-item:has([aria-label*="Share"]),
+.monaco-menu .action-item:has([aria-label*="Copy As"]),
+.monaco-menu .action-item:has([aria-label*="View File History"]),
+.monaco-menu .action-item:has([aria-label*="View Line History"]),
+.monaco-menu .action-item:has([aria-label*="Run in Interactive Window"]),
+.monaco-menu .action-item:has([aria-label*="Command Palette"]),
+.monaco-menu .action-item:has([aria-label*="CodeSnap"]),
+.monaco-menu .action-item:has([aria-label*="LeetCode"]),
+.monaco-menu .action-item:has([title*="Go to Declaration"]),
+.monaco-menu .action-item:has([title*="Go to Type Definition"]),
+.monaco-menu .action-item:has([title*="Go to Implementations"]),
+.monaco-menu .action-item:has([title*="Find All Implementations"]),
+.monaco-menu .action-item:has([title*="Show Call Hierarchy"]),
+.monaco-menu .action-item:has([title*="Show Type Hierarchy"]),
+.monaco-menu .action-item:has([title*="Peek"]),
+.monaco-menu .action-item:has([title*="Generate Docstring"]),
+.monaco-menu .action-item:has([title*="Change All Occurrences"]),
+.monaco-menu .action-item:has([title*="Open Changes"]),
+.monaco-menu .action-item:has([title*="Open on Remote"]),
+.monaco-menu .action-item:has([title*="File Annotations"]),
+.monaco-menu .action-item:has([title*="File History"]),
+.monaco-menu .action-item:has([title*="Share"]),
+.monaco-menu .action-item:has([title*="Copy As"]),
+.monaco-menu .action-item:has([title*="View File History"]),
+.monaco-menu .action-item:has([title*="View Line History"]),
+.monaco-menu .action-item:has([title*="Run in Interactive Window"]),
+.monaco-menu .action-item:has([title*="Command Palette"]),
+.monaco-menu .action-item:has([title*="CodeSnap"]),
+.monaco-menu .action-item:has([title*="LeetCode"]) {
+  display: none !important;
+}
+
+/* Also hide consecutive/empty separators */
+.monaco-menu .action-item.separator + .action-item.separator,
+.monaco-menu .action-item.separator:first-child,
+.monaco-menu .action-item.separator:last-child {
+  display: none !important;
+}
+
+/* Smooth padding for menu items */
+.monaco-menu .monaco-action-bar {
+  padding: 6px 4px !important;
+}
+.monaco-menu .action-item {
+  border-radius: 6px !important;
+  margin: 1px 2px !important;
+}

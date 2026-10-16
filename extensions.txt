@@ -1,0 +1,24 @@
+# ==========================================
+# VS Code Custom Theme - Extension List
+# ==========================================
+
+# 1. Core Transparency, Vibrancy & Icon Themes
+alexowl.transparent-color-theme
+be5invis.vscode-custom-css
+be5invis.vscode-icontheme-nomo-dark
+piousdeer.adwaita-theme
+brandonkirbyson.vscode-animations
+
+# 2. LeetCode & C/C++ Local Debugging Environment
+vadimcn.vscode-lldb
+ms-vscode.cpptools
+formulahendry.code-runner
+leetcode.vscode-leetcode
+
+# 3. Clean Developer Experience & Productivity
+usernamehw.errorlens
+adpyke.codesnap
+eamodio.gitlens
+bierner.markdown-mermaid
+bierner.markdown-preview-github-styles
+shd101wyy.markdown-preview-enhanced

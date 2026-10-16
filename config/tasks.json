@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-leetcode",
+            "type": "shell",
+            "command": "${userHome}/.vscode/leetcode_build.sh",
+            "args": [
+                "${file}",
+                "/tmp/leetcode_build/${fileBasenameNoExtension}"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false
+            },
+            "problemMatcher": "$gcc"
+        }
+    ]
+}
