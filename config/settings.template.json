@@ -1058,4 +1058,13 @@
   "apc.sidebar.titlebar": {
     "height": 32
   }
+  "background.enabled": true,
+  "background.fullscreen": {
+    "images": [
+      "{{HOME}}/.vscode/background_blur.png"
+    ],
+    "opacity": 0.95,
+    "size": "cover",
+    "position": "center"
+  },
 }

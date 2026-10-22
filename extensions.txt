@@ -5,6 +5,7 @@
 # 1. Core Transparency, Vibrancy & Icon Themes
 alexowl.transparent-color-theme
 be5invis.vscode-custom-css
+shalldie.background
 be5invis.vscode-icontheme-nomo-dark
 piousdeer.adwaita-theme
 brandonkirbyson.vscode-animations
