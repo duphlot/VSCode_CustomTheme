@@ -957,6 +957,7 @@
     "vibrancy": "under-window",
     "visualEffectState": "active"
   },
+  "apc.iframe.style": "{{HOME}}/.vscode/webview.css",
   "apc.stylesheet": {
     ".monaco-workbench .part.sidebar .label-name": "font-family: 'JetBrains Mono', Menlo, Monaco, monospace !important;",
     ".monaco-workbench .part.sidebar .monaco-icon-label": "font-family: 'JetBrains Mono', Menlo, Monaco, monospace !important;",

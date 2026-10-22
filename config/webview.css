@@ -1,0 +1,7 @@
+[class*="stickyHeader_"] {
+  --sticky-bg: #212b32 !important;
+  background-image: linear-gradient(to bottom, #212b32 calc(100% - 12px), transparent 100%) !important;
+}
+[class*="userMessage_"] {
+  background-color: #212b32 !important;
+}

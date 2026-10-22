@@ -1,0 +1,19 @@
+body { padding: 8px 20px 20px; font-family: var(--vscode-font-family); font-size: var(--vscode-font-size, 13px); color: var(--vscode-foreground); user-select: none; text-shadow: 0 0 1px rgba(0,0,0,0.9), 0 1px 3px rgba(0,0,0,0.7); }
+.row { margin-bottom: 12px; }
+.row-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+.value { color: var(--vscode-descriptionForeground); font-variant-numeric: tabular-nums; }
+.section { margin: 16px 0 8px; padding-top: 12px; border-top: 1px solid var(--vscode-widget-border, var(--vscode-panel-border, rgba(128,128,128,0.35))); font-size: 11px; color: var(--vscode-descriptionForeground); }
+.split { display: flex; justify-content: space-between; gap: 8px; }
+.muted { max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.btn { display: flex; align-items: center; justify-content: center; padding: 4px 8px; min-height: 26px; font: inherit; color: var(--vscode-button-secondaryForeground); background: var(--vscode-button-secondaryBackground); border: 1px solid transparent; border-radius: 2px; cursor: pointer; }
+.btn:hover { background: var(--vscode-button-secondaryHoverBackground); }
+.btn:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: 1px; }
+.btn.active { border-color: var(--vscode-focusBorder); }
+.btn.wide { width: 100%; }
+.range { -webkit-appearance: none; appearance: none; width: 100%; height: 14px; margin: 0; background: transparent; cursor: pointer; outline: none; }
+.range::-webkit-slider-runnable-track { height: 2px; border-radius: 1px; background: linear-gradient(to right, var(--vscode-focusBorder) var(--fill, 50%), var(--vscode-input-border, rgba(128,128,128,0.4)) var(--fill, 50%)); }
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; margin-top: -5px; border-radius: 50%; border: 0; background: var(--vscode-foreground); }
+.range:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 2px var(--vscode-focusBorder); }
+.check { display: flex; align-items: center; gap: 8px; margin: 4px 0; cursor: pointer; }
+.check input { margin: 0; accent-color: var(--vscode-focusBorder); }

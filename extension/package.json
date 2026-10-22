@@ -1,0 +1,49 @@
+{
+  "name": "bg-effects",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "0.1.0",
+  "publisher": "ptdung",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Themes", "Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "bgEffects",
+          "title": "%viewTitle%",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "bgEffects": [
+        {
+          "type": "webview",
+          "id": "bgEffects.panel",
+          "name": "%viewTitle%"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "bgEffects.reset",
+        "title": "%resetCommand%",
+        "icon": "$(discard)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "bgEffects.reset",
+          "when": "view == bgEffects.panel",
+          "group": "navigation"
+        }
+      ]
+    }
+  }
+}

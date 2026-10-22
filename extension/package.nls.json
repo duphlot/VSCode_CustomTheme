@@ -1,0 +1,6 @@
+{
+  "displayName": "Background & Effects",
+  "description": "Control wallpaper opacity, overlay, blur, film grain and text shadow from the side bar.",
+  "viewTitle": "Background & Effects",
+  "resetCommand": "Background & Effects: Reset to Defaults"
+}
