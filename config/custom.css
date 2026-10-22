@@ -1,6 +1,24 @@
 /* ==========================================================================
-   VS CODE CUSTOM STYLESHEET - JETBRAINS MONO & MACOS VIBRANCY POLISH
+   VS CODE CUSTOM STYLESHEET - LUMINOUS GLASS & MACOS VIBRANCY POLISH
    ========================================================================== */
+
+/* 0. LUMINOUS GLASS VIBRANCY & BACKDROP SATURATION BOOST */
+.monaco-workbench {
+  background: transparent !important;
+}
+
+.monaco-workbench .part.editor,
+.monaco-workbench .part.sidebar,
+.monaco-workbench .part.panel,
+.monaco-workbench .part.auxiliarybar {
+  backdrop-filter: blur(32px) saturate(220%) brightness(1.18) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(220%) brightness(1.18) !important;
+}
+
+/* Crisp text readability on glass */
+.monaco-editor .view-lines {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
 
 /* 1. SIDEBAR & EXPLORER FONT & LARGER SIZE */
 .monaco-workbench .part.sidebar .monaco-list-row .label-name,
@@ -11,6 +29,11 @@
   font-size: 15px !important;
   font-weight: 500 !important;
   font-feature-settings: 'calt' 1, 'liga' 1;
+}
+
+.monaco-workbench .part.sidebar .monaco-list-row .label-name {
+  color: #f8fafc !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
 }
 
 /* 2. PROTECT ALL ICONS - PREVENT BOX GLYPHS */
@@ -25,7 +48,7 @@
   font-family: codicon !important;
 }
 
-/* 3. MODERN PILL-SHAPED EXPLORER ROW SELECTION */
+/* 3. MODERN PILL-SHAPED EXPLORER ROW SELECTION & GLOW */
 .monaco-workbench .part.sidebar .monaco-list-row {
   border-radius: 6px !important;
   margin: 1px 4px !important;
@@ -33,20 +56,30 @@
   transition: background-color 0.15s ease, transform 0.1s ease !important;
 }
 
+.monaco-workbench .part.sidebar .monaco-list-row.selected {
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.22) 0%, rgba(56, 189, 248, 0.08) 100%) !important;
+  border-left: 3px solid #38bdf8 !important;
+  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.25) !important;
+}
+
+.monaco-workbench .part.sidebar .monaco-list-row:hover:not(.selected) {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
 /* 4. SLIM SMOOTH SCROLLBAR */
 .scrollbar > .slider {
-  border-radius: 4px !important;
+  border-radius: 6px !important;
 }
 
 /* 5. SEAMLESS UNIFIED HOVER CARD (NO NESTED FRAMES) */
 .static-tooltip,
 .monaco-hover {
-  background: rgba(16, 22, 28, 0.88) !important;
-  backdrop-filter: blur(28px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  background: rgba(15, 23, 42, 0.88) !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 12px !important;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(56, 189, 248, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   overflow: hidden !important;
 }
 
@@ -54,7 +87,6 @@
   padding: 10px 14px !important;
 }
 
-/* Eliminate all nested boxes/borders inside hover card */
 .monaco-hover .hover-contents .code,
 .monaco-hover .hover-contents code,
 .monaco-hover .hover-contents pre {
@@ -73,7 +105,7 @@
 }
 
 .monaco-hover a {
-  color: #59c2ff !important;
+  color: #38bdf8 !important;
   text-decoration: none !important;
 }
 
@@ -87,24 +119,49 @@
   vertical-align: middle !important;
 }
 
-/* 6. NEON CARET GLOW */
-/* 6. SNAPPY SMOOTH CARET ANIMATION (FAST & BUTTERY SMOOTH) */
+/* 6. NEON CARET GLOW & BUTTERY SMOOTH ANIMATION */
+.monaco-editor .cursors-layer .cursor {
+  background-color: #38bdf8 !important;
+  box-shadow: 0 0 10px #38bdf8, 0 0 20px rgba(56, 189, 248, 0.7) !important;
+}
 .monaco-editor .cursors-layer.cursor-smooth-caret-animation > .cursor {
   transition: all 45ms cubic-bezier(0.15, 0.85, 0.35, 1) !important;
 }
 
-/* Status bar restored to normal */
-
-/* 9. ACTIVE TAB ACCENT GLOW */
+/* 9. RADIANT ACTIVE TAB GLOW */
 .tab.active {
-  box-shadow: inset 0 2px 8px rgba(89, 194, 255, 0.25) !important;
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.22) 0%, rgba(56, 189, 248, 0.05) 100%) !important;
+  border-top: 2px solid #38bdf8 !important;
+  box-shadow: inset 0 2px 10px rgba(56, 189, 248, 0.4), 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.tab.active .label-name {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.6) !important;
+}
+
+.tab.active::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 5% !important;
+  width: 90% !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent, #38bdf8, transparent) !important;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.9) !important;
+  border-radius: 2px !important;
 }
 
 /* 10. GLOWING ACCENT ON CURRENT LINE */
 .monaco-editor .view-overlays .current-line {
   border: none !important;
-  background: linear-gradient(90deg, rgba(89, 194, 255, 0.07) 0%, rgba(89, 194, 255, 0.01) 40%, transparent 100%) !important;
-  border-radius: 4px !important;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.14) 0%, rgba(56, 189, 248, 0.03) 50%, transparent 100%) !important;
+  border-left: 3px solid #38bdf8 !important;
+  border-radius: 0 6px 6px 0 !important;
+  box-shadow: inset 0 0 8px rgba(56, 189, 248, 0.1) !important;
 }
 .monaco-editor .margin-view-overlays .current-line-margin {
   border-left: none !important;
@@ -112,29 +169,13 @@
 
 /* 11. ACTIVE LINE NUMBER HIGHLIGHT & DIMMED GUTTER */
 .monaco-editor .line-numbers {
-  opacity: 0.55;
+  opacity: 0.7;
 }
 .monaco-editor .line-numbers.active-line-number {
   opacity: 1 !important;
-  color: #59c2ff !important;
+  color: #38bdf8 !important;
   font-weight: 700 !important;
-}
-
-/* 12. RADIANT UNDERLINE ON ACTIVE TAB */
-.tab.active {
-  position: relative !important;
-  overflow: visible !important;
-}
-.tab.active::after {
-  content: '' !important;
-  position: absolute !important;
-  bottom: 0 !important;
-  left: 10% !important;
-  width: 80% !important;
-  height: 2px !important;
-  background: linear-gradient(90deg, transparent, #59c2ff, transparent) !important;
-  box-shadow: 0 0 8px rgba(89, 194, 255, 0.6) !important;
-  border-radius: 2px !important;
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.7) !important;
 }
 
 /* 13. SMOOTH ROTATION ON TREE ARROWS */
@@ -144,12 +185,12 @@
 
 /* 14. FROSTED GLASS NOTIFICATION CARDS */
 .notifications-toasts .notification-toast {
-  background: rgba(18, 24, 30, 0.85) !important;
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(15, 23, 42, 0.88) !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 12px !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(56, 189, 248, 0.2) !important;
 }
 
 /* 15. GLASS BREADCRUMBS */
@@ -157,7 +198,7 @@
   background: transparent !important;
   font-family: 'JetBrains Mono', monospace !important;
   font-size: 13px !important;
-  opacity: 0.85 !important;
+  opacity: 0.9 !important;
 }
 
 /* 16. MACOS TRAFFIC LIGHTS INSET & ALIGNMENT */
@@ -185,10 +226,15 @@
 
 /* 19. SEAMLESS GLASS PANEL SEPARATORS */
 .monaco-workbench .part.sidebar {
-  border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3) !important;
 }
 .monaco-workbench .part.editor {
   border-left: none !important;
+}
+.monaco-workbench .part.auxiliarybar {
+  border-left: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: -2px 0 20px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* ==========================================================================
@@ -239,14 +285,12 @@
   display: none !important;
 }
 
-/* Also hide consecutive/empty separators */
 .monaco-menu .action-item.separator + .action-item.separator,
 .monaco-menu .action-item.separator:first-child,
 .monaco-menu .action-item.separator:last-child {
   display: none !important;
 }
 
-/* Smooth padding for menu items */
 .monaco-menu .monaco-action-bar {
   padding: 6px 4px !important;
 }
