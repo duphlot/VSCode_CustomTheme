@@ -132,7 +132,7 @@
     "breadcrumb.foreground": "#d6deeb",
     "breadcrumb.focusForeground": "#ffffff",
     "breadcrumb.activeSelectionForeground": "#ffffff",
-    "editorCodeLens.foreground": "#a4b1c6",
+    "editorCodeLens.foreground": "#b8c7db",
     "gitDecoration.ignoredResourceForeground": "#9eb0c6",
     "panelTitle.activeForeground": "#ffffff",
     "panelTitle.inactiveForeground": "#b4bdd0",
@@ -186,11 +186,36 @@
     "textMateRules": [
       {
         "scope": [
-          "comment"
+          "comment",
+          "punctuation.definition.comment"
         ],
         "settings": {
           "fontStyle": "italic",
-          "foreground": "#8ea0b5"
+          "foreground": "#9ec5e8"
+        }
+      },
+      {
+        "scope": [
+          "comment.block.documentation",
+          "comment.line.triple-slash",
+          "comment.block.documentation.cs",
+          "comment.line.triple-slash.cs"
+        ],
+        "settings": {
+          "fontStyle": "italic",
+          "foreground": "#9ec5e8"
+        }
+      },
+      {
+        "scope": [
+          "comment.block.documentation entity.name.tag",
+          "comment.line.triple-slash entity.name.tag",
+          "comment.block.documentation punctuation.definition.tag",
+          "comment.line.triple-slash punctuation.definition.tag",
+          "entity.name.tag.xml"
+        ],
+        "settings": {
+          "foreground": "#7dd3fc"
         }
       },
       {
@@ -737,7 +762,8 @@
           "punctuation.definition.comment"
         ],
         "settings": {
-          "foreground": "#7f8a9c"
+          "fontStyle": "italic",
+          "foreground": "#9ec5e8"
         }
       },
       {
@@ -825,7 +851,10 @@
       "function": "#ffb454",
       "method": "#ffb454",
       "macro": "#e6c08a",
-      "comment": "#5a6673",
+      "comment": {
+        "foreground": "#9ec5e8",
+        "italic": true
+      },
       "string": "#aad94c",
       "number": "#d2a6ff",
       "regexp": "#95e6cb",
