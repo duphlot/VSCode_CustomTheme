@@ -43,7 +43,7 @@ Opening several VS Code windows is fine: they share the same state file, and whi
 From the repository root, run:
 
 ```bash
-./install.sh
+./install-extension.sh
 ```
 
 The script copies `custom.css`, `bg_controller.js` and `webview.css` into `~/.vscode/` and installs this extension into `~/.vscode/extensions/ptdung.bg-effects-0.1.0/`.
@@ -148,7 +148,7 @@ getComputedStyle(document.documentElement).getPropertyValue('--bg-size')
 ## Project layout
 
 ```
-extension/
+background-effects/
   package.json           Extension manifest
   package.nls.json       English strings for the manifest
   package.nls.vi.json    Vietnamese strings for the manifest
@@ -167,7 +167,7 @@ config/
   custom.css             Wallpaper, overlay, grain and text legibility styles
   bg_controller.js       Script injected into the workbench
   webview.css            Optional fix for the Claude Code chat
-install.sh               Copies everything into ~/.vscode
+install-extension.sh     Copies the extension and its support files into ~/.vscode
 ```
 
 ## Uninstall

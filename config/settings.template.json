@@ -1037,6 +1037,7 @@
   "workbench.productIconTheme": "adwaita",
   "vscode_custom_css.imports": [
     "file://{{HOME}}/.vscode/custom.css",
+    "file://{{HOME}}/.vscode/bg_controller.js",
     "file://{{HOME}}/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.9/dist/updateHandler.js"
   ],
   "workbench.colorTheme": "Transparent Color Theme",
