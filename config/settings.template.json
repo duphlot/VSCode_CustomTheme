@@ -105,8 +105,8 @@
     "tab.activeBorder": "#00000000",
     "tab.inactiveForeground": "#cbd5e1",
     "tab.activeForeground": "#ffffff",
-    "editor.lineHighlightBackground": "#ffffff08",
-    "editor.lineHighlightBorder": "#ffffff14",
+    "editor.lineHighlightBackground": "#59c2ff14",
+    "editor.lineHighlightBorder": "#59c2ff33",
     "terminalCursor.foreground": "#38bdf8",
     "terminal.foreground": "#f0f6fc",
     "input.background": "#0000001a",
@@ -922,10 +922,11 @@
   },
   "apc.font.family": "SF Pro Display",
   "apc.electron": {
-    "opacity": 0.98,
+    "opacity": 0.95,
     "transparent": true,
     "backgroundColor": "#00000000",
-    "vibrancy": "fullscreen-ui"
+    "vibrancy": "under-window",
+    "visualEffectState": "active"
   },
   "apc.stylesheet": {
     ".monaco-workbench .part.sidebar .label-name": "font-family: 'JetBrains Mono', Menlo, Monaco, monospace !important;",
