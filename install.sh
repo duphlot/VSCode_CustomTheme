@@ -100,7 +100,9 @@ cp "$SCRIPT_DIR/config/leetcode.code-snippets" "$VSCODE_USER_DIR/snippets/leetco
 
 # 8. Deploy Custom CSS & LeetCode Environment to ~/.vscode/
 echo -e "${BLUE}[Styles & Env]${NC} Đang sao chép custom.css và môi trường LeetCode vào ~/.vscode/..."
-cp "$SCRIPT_DIR/config/custom.css" "$HOME/.vscode/custom.css"
+sed "s|{{HOME}}|$HOME|g" "$SCRIPT_DIR/config/custom.css" > "$HOME/.vscode/custom.css"
+cp "$SCRIPT_DIR/config/background_blur.png" "$HOME/.vscode/background_blur.png" 2>/dev/null || true
+cp "$SCRIPT_DIR/config/background.png" "$HOME/.vscode/background.png" 2>/dev/null || true
 cp "$SCRIPT_DIR/config/leetcode_env.h" "$HOME/.vscode/leetcode_env.h"
 cp "$SCRIPT_DIR/config/leetcode_build.sh" "$HOME/.vscode/leetcode_build.sh"
 chmod +x "$HOME/.vscode/leetcode_build.sh"

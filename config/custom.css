@@ -1,3 +1,22 @@
+/* ==========================================================================
+   0. CUSTOM STARRY NEBULA BACKGROUND WITH FROSTED GLASS BLUR
+   ========================================================================== */
+.monaco-workbench::before {
+  content: '' !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-image: url('file://{{HOME}}/.vscode/background_blur.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  opacity: 0.95 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
 
 /* Crisp text shadow on glass */
 .monaco-editor .view-lines {
