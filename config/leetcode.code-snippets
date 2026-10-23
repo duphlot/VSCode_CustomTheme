@@ -309,7 +309,7 @@
             "}",
             "#endif"
         ],
-        "description": "Khung main() cục bộ để chạy test case & debug bằng F5 / Code Runner"
+        "description": "Local main() skeleton for running test cases and debugging with F5 / Code Runner"
     },
     "LeetCode Test Binary Tree": {
         "scope": "cpp",
@@ -324,7 +324,7 @@
             "auto ans = sol.${2:maxDepth}(root);",
             "dbg(ans);"
         ],
-        "description": "Tạo nhanh Binary Tree (TreeNode) chuẩn LeetCode BFS và in ASCII cây trực quan"
+        "description": "Quickly build a LeetCode-style binary tree (TreeNode) from BFS order and print it as an ASCII tree"
     },
     "LeetCode Test Linked List": {
         "scope": "cpp",
@@ -338,7 +338,7 @@
             "auto ans = sol.${2:reverseList}(head);",
             "printList(ans);"
         ],
-        "description": "Tạo Linked List từ vector & in danh sách"
+        "description": "Build a linked list from a vector and print it"
     },
     "LeetCode Benchmark Timer": {
         "scope": "cpp",
@@ -351,7 +351,7 @@
             "$0",
             "LC_TIMER_END;"
         ],
-        "description": "Đo thời gian thực thi giải thuật theo micro giây (µs)"
+        "description": "Measure algorithm execution time in microseconds"
     },
     "LeetCode Test Singly Linked List": {
         "scope": "cpp",
@@ -366,7 +366,7 @@
             "auto ans = sol.${2:functionName}(head);",
             "printList(ans);"
         ],
-        "description": "Tạo nhanh Singly Linked List (ListNode) từ vector và in kết quả"
+        "description": "Quickly build a singly linked list (ListNode) from a vector and print the result"
     },
     "LeetCode Test Doubly Linked List": {
         "scope": "cpp",
@@ -381,7 +381,7 @@
             "auto ans = sol.${2:functionName}(head);",
             "printDList(ans);"
         ],
-        "description": "Tạo nhanh Doubly Linked List (DListNode / prev-next) và in kết quả"
+        "description": "Quickly build a doubly linked list (DListNode, prev/next) and print the result"
     },
     "LeetCode Test Binary Search Tree": {
         "scope": "cpp",
@@ -396,7 +396,7 @@
             "auto ans = sol.${2:searchBST}(root, ${3:2});",
             "printTree(ans);"
         ],
-        "description": "Tạo nhanh Binary Search Tree (BST) tự động chèn node và in cây"
+        "description": "Quickly build a binary search tree (BST) by inserting nodes and print the tree"
     },
     "LeetCode Test 2D Grid / Matrix": {
         "scope": "cpp",
@@ -415,7 +415,7 @@
             "auto ans = sol.${2:minPathSum}(grid);",
             "dbg(ans);"
         ],
-        "description": "Tạo nhanh 2D Grid / Matrix và in bảng cân chỉnh đẹp"
+        "description": "Quickly build a 2D grid / matrix and print it as an aligned table"
     },
     "LeetCode Test Graph Adjacency List": {
         "scope": "cpp",
@@ -434,7 +434,7 @@
             "}",
             "dbg(adj);"
         ],
-        "description": "Tạo nhanh danh sách kề (Adjacency List) đồ thị từ danh sách cạnh edges"
+        "description": "Quickly build a graph adjacency list from an edge list"
     },
     "LeetCode Test Vector Array": {
         "scope": "cpp",
@@ -449,7 +449,7 @@
             "auto ans = sol.${3:twoSum}(nums, target);",
             "dbg(ans);"
         ],
-        "description": "Tạo mảng vector test case"
+        "description": "Create a test case vector"
     },
     "LeetCode Free Memory Helper": {
         "scope": "cpp",
@@ -461,6 +461,6 @@
             "freeList(${1:head});",
             "freeTree(${2:root});"
         ],
-        "description": "Giải phóng bộ nhớ danh sách liên kết hoặc cây nhị phân"
+        "description": "Free the memory of a linked list or binary tree"
     }
 }

@@ -4,3 +4,11 @@
 backup_*
 /tmp/
 node_modules/
+*.psd
+wallpaper/
+__pycache__/
+*.pyc
+*.vsix
+*.log
+.env
+config/local.css

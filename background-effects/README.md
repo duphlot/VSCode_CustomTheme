@@ -4,7 +4,7 @@ An extension for VS Code that controls a full-window wallpaper: opacity, dark ov
 
 The interface is available in English and Vietnamese and can be switched from the panel itself.
 
-![Wallpaper with the panel closed](media/images/1.png)
+![Wallpaper with the panel closed](media/images/1.webp)
 
 ## Contents
 
@@ -106,21 +106,21 @@ The reset button in the panel title restores every value above, including image 
 
 The wallpaper is one layer behind the whole window. Each area you untick is painted with a solid dark color (`#0b1118`) so the wallpaper no longer shows through it. The areas are the sidebar with the icon bar, the editor, the bottom panel, the secondary side bar, and the title and status bars. Leave everything ticked for a full-window wallpaper, or untick all but the sidebar to confine it there.
 
-![Editor area unticked so only the other areas show the wallpaper](media/images/features/1.png)
+![Editor area unticked so only the other areas show the wallpaper](media/images/features/1.webp)
 
 ## Screenshots
 
 The same panel with different wallpapers and settings.
 
-![Painterly wallpaper](media/images/2.png)
+![Painterly wallpaper](media/images/2.webp)
 
-![Photo wallpaper](media/images/3.png)
+![Photo wallpaper](media/images/3.webp)
 
-![Panel open over a warm wallpaper with grain](media/images/4.png)
+![Panel open over a warm wallpaper with grain](media/images/4.webp)
 
-![Panel open over a dim wallpaper](media/images/5.png)
+![Panel open over a dim wallpaper](media/images/5.webp)
 
-![Panel open over a grayscale wallpaper](media/images/6.png)
+![Panel open over a grayscale wallpaper](media/images/6.webp)
 
 ## Limitations
 

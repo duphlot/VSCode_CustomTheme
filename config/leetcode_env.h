@@ -24,14 +24,8 @@
 
 using namespace std;
 
-// Sentinel value representing null in tree serialization (e.g. {3, 9, 20, null, null, 15, 7})
 constexpr int null = -1000000007;
 
-// ==========================================
-// LeetCode Standard Data Structures
-// ==========================================
-
-// Singly-linked list
 struct ListNode {
     int val;
     ListNode *next;
@@ -40,7 +34,6 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-// Doubly-linked list node
 struct DListNode {
     int val;
     DListNode *prev;
@@ -51,7 +44,6 @@ struct DListNode {
 };
 using DoubleListNode = DListNode;
 
-// Binary tree node
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -61,7 +53,6 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-// Node (N-ary Tree / Graph / Random Pointer / Doubly with Child)
 class Node {
 public:
     int val;
@@ -80,9 +71,6 @@ public:
     Node(int _val, Node* _prev, Node* _next, Node* _child) : val(_val), children(), neighbors(), next(_next), prev(_prev), random(nullptr), left(nullptr), right(nullptr), child(_child) {}
 };
 
-// ==========================================
-// Helper Functions: Singly-Linked List
-// ==========================================
 inline ListNode* createList(const vector<int>& vals) {
     ListNode dummy(0);
     ListNode* tail = &dummy;
@@ -123,9 +111,6 @@ inline void freeList(ListNode* head) {
     }
 }
 
-// ==========================================
-// Helper Functions: Doubly-Linked List
-// ==========================================
 inline DListNode* createDList(const vector<int>& vals) {
     if (vals.empty()) return nullptr;
     DListNode* head = new DListNode(vals[0]);
@@ -156,9 +141,6 @@ inline void freeDList(DListNode* head) {
     }
 }
 
-// ==========================================
-// Helper Functions: Binary Tree & BST
-// ==========================================
 inline TreeNode* createTree(const vector<int>& vals) {
     if (vals.empty() || vals[0] == null) return nullptr;
     TreeNode* root = new TreeNode(vals[0]);
@@ -232,9 +214,6 @@ inline void freeTree(TreeNode* root) {
     delete root;
 }
 
-// ==========================================
-// Helper Functions: 2D Grid / Matrix
-// ==========================================
 template<typename T>
 inline void printGrid(const vector<vector<T>>& grid) {
     cout << "\033[1;33m[Grid " << grid.size() << "x" << (grid.empty() ? 0 : grid[0].size()) << "]:\033[0m\n";
@@ -247,9 +226,6 @@ inline void printGrid(const vector<vector<T>>& grid) {
     }
 }
 
-// ==========================================
-// Container & Node Pretty Printing
-// ==========================================
 template<typename T1, typename T2>
 ostream& operator<<(ostream& os, const pair<T1, T2>& p);
 
@@ -360,9 +336,6 @@ inline ostream& operator<<(ostream& os, const unordered_map<K, V>& m) {
     return os << "}";
 }
 
-// ==========================================
-// Debug & Benchmark Macros
-// ==========================================
 #ifndef dbg
 #define dbg(x) cout << "\033[1;36m[DEBUG L" << __LINE__ << "]\033[0m " << #x << " = " << (x) << endl
 #endif

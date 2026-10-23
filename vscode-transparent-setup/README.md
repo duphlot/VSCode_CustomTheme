@@ -2,7 +2,7 @@
 
 A complete, beginner-friendly guide to recreating this modern frosted glass (macOS Vibrancy) aesthetic with floating pill-shaped directory items, crisp typography, and ruby neon accents in Visual Studio Code.
 
-![VS Code Transparent Setup Showcase](preview-main.png)
+![VS Code Transparent Setup Showcase](preview-main.webp)
 *Figure 1: Complete setup showcasing ultra-dark macOS vibrancy, pill-shaped directory selection, and high-contrast JetBrains Mono typography.*
 
 ---
@@ -82,7 +82,7 @@ To allow the Apc extension to patch the Electron window for native macOS ultra-d
 
 ## 6. Key Design Elements
 
-![TypeScript and React Layout Preview](preview-tsx.png)
+![TypeScript and React Layout Preview](preview-tsx.webp)
 *Figure 2: TypeScript/React layout featuring elevated tabs, colorful icons, and vibrant syntax highlighting.*
 
 ### Uniform Frosted Glass Transparency

@@ -1,0 +1,268 @@
+#!/usr/bin/env python3
+import base64
+import curses
+import json
+import os
+import re
+import subprocess
+from dataclasses import dataclass
+from pathlib import Path
+
+from PIL import Image, ImageChops, ImageEnhance, ImageFilter
+
+CONFIG_DIR = Path.home() / ".config" / "wezterm"
+STATE_FILE = CONFIG_DIR / "state.json"
+SOURCE_IMAGE = CONFIG_DIR / "background.jpg"
+FINAL_IMAGE = CONFIG_DIR / "background_final.jpg"
+VSCODE_DIR = Path.home() / ".vscode" / "bg-effects"
+
+BASE_COLOR = "#0b1118"
+PANEL_TINT_COLOR = "#080d18"
+FROST_COLOR = "#e6edf7"
+MAX_IMAGE_SIDE = 2560
+BLUR_REFERENCE_WIDTH = 3600
+GRAIN_SIGMA_PER_STEP = 0.14
+FONT_CELL_WIDTH = 0.6
+FONT_CELL_HEIGHT = 1.25
+VSCODE_GRAIN_SCALE = 0.3
+BAR_WIDTH = 20
+LABEL_WIDTH = 26
+
+
+@dataclass(frozen=True)
+class Slider:
+    key: str
+    label: str
+    low: int
+    high: int
+    step: int
+    bakes_image: bool = False
+
+
+SLIDERS = [
+    Slider("base", "Base solidity", 0, 100, 5),
+    Slider("opacity", "Image opacity", 0, 100, 5, bakes_image=True),
+    Slider("brightness", "Image brightness", 10, 150, 5, bakes_image=True),
+    Slider("overlay", "Dark overlay", 0, 100, 5, bakes_image=True),
+    Slider("frost", "White frost", 0, 50, 1, bakes_image=True),
+    Slider("blur", "Image blur", 0, 40, 2, bakes_image=True),
+    Slider("grain", "Film grain", 0, 100, 5, bakes_image=True),
+    Slider("window_blur", "Window blur (macOS)", 0, 100, 5),
+    Slider("font_size", "Font size", 10, 30, 1),
+    Slider("padding_top", "Padding top (px)", 0, 120, 4),
+    Slider("padding_side", "Padding sides (px)", 0, 60, 2),
+    Slider("window_width", "Window width (% screen)", 20, 100, 5),
+    Slider("window_height", "Window height (% screen)", 20, 100, 5),
+]
+
+DEFAULTS = {
+    "base": 100,
+    "opacity": 59,
+    "brightness": 80,
+    "overlay": 30,
+    "frost": 8,
+    "blur": 12,
+    "grain": 30,
+    "window_blur": 0,
+    "font_size": 19,
+    "padding_top": 60,
+    "padding_side": 16,
+    "window_width": 70,
+    "window_height": 75,
+}
+
+ACTION_CHOOSE_IMAGE = "Choose image..."
+ACTION_IMPORT_VSCODE = "Import from VSCode"
+ACTION_RESET = "Reset to defaults"
+ACTION_QUIT = "Quit"
+ACTIONS = [ACTION_CHOOSE_IMAGE, ACTION_IMPORT_VSCODE, ACTION_RESET, ACTION_QUIT]
+
+KEYS_ENTER = (10, 13)
+KEYS_QUIT = (ord("q"), 27)
+
+
+def load_state() -> dict:
+    try:
+        return {**DEFAULTS, **json.loads(STATE_FILE.read_text(encoding="utf-8"))}
+    except (OSError, ValueError):
+        return dict(DEFAULTS)
+
+
+def screen_points() -> tuple[int, int] | None:
+    script = 'tell application "Finder" to get bounds of window of desktop'
+    try:
+        output = subprocess.run(
+            ["osascript", "-e", script], capture_output=True, text=True, timeout=5, check=True
+        ).stdout
+        _, _, width, height = (int(value) for value in output.split(","))
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return None
+    return width, height
+
+
+def initial_size(state: dict) -> dict:
+    screen = screen_points()
+    if screen is None:
+        return {}
+    width = screen[0] * state["window_width"] / 100 - state["padding_side"]
+    height = screen[1] * state["window_height"] / 100 - (state["padding_top"] + state["padding_side"]) / 2
+    return {
+        "initial_cols": int(width / (state["font_size"] * FONT_CELL_WIDTH)),
+        "initial_rows": int(height / (state["font_size"] * FONT_CELL_HEIGHT)),
+    }
+
+
+def save_state(state: dict) -> None:
+    state.update(initial_size(state))
+    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+    temporary = STATE_FILE.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(state, indent=2), encoding="utf-8")
+    os.replace(temporary, STATE_FILE)
+
+
+def render_image(state: dict) -> None:
+    image = Image.open(SOURCE_IMAGE).convert("RGB")
+    if state["blur"] > 0:
+        image = image.filter(ImageFilter.GaussianBlur(state["blur"] * image.width / BLUR_REFERENCE_WIDTH))
+    image = ImageEnhance.Brightness(image).enhance(state["brightness"] / 100)
+    image = Image.blend(Image.new("RGB", image.size, BASE_COLOR), image, state["opacity"] / 100)
+    image = Image.blend(image, Image.new("RGB", image.size, PANEL_TINT_COLOR), state["overlay"] / 100)
+    image = Image.blend(image, Image.new("RGB", image.size, FROST_COLOR), state["frost"] / 100)
+    if state["grain"] > 0:
+        noise = Image.effect_noise(image.size, state["grain"] * GRAIN_SIGMA_PER_STEP).convert("RGB")
+        image = ImageChops.add(image, noise, scale=1, offset=-128)
+    image.save(FINAL_IMAGE, quality=95, subsampling=0)
+
+
+def set_source_image(path: str) -> None:
+    cleaned = path.strip().strip("'\"")
+    image = Image.open(Path(cleaned).expanduser()).convert("RGB")
+    image.thumbnail((MAX_IMAGE_SIDE, MAX_IMAGE_SIDE))
+    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+    image.save(SOURCE_IMAGE, quality=92)
+
+
+def import_vscode(state: dict) -> None:
+    vscode_state = json.loads((VSCODE_DIR / "state.json").read_text(encoding="utf-8"))
+    data_uri = (VSCODE_DIR / "image.dat").read_text(encoding="utf-8").strip()
+    match = re.match(r"data:image/\w+;base64,(.*)", data_uri, re.S)
+    if match is None:
+        raise ValueError("image.dat is not a base64 data URI")
+    temporary = CONFIG_DIR / "_import.img"
+    temporary.write_bytes(base64.b64decode(match.group(1)))
+    try:
+        set_source_image(str(temporary))
+    finally:
+        temporary.unlink(missing_ok=True)
+    state["opacity"] = vscode_state.get("opacity", state["opacity"])
+    state["blur"] = vscode_state.get("blur", state["blur"])
+    state["grain"] = round(vscode_state.get("grain", 100) * VSCODE_GRAIN_SCALE)
+    state["brightness"] = DEFAULTS["brightness"]
+    state["overlay"] = DEFAULTS["overlay"]
+
+
+def prompt(screen, text: str) -> str:
+    curses.curs_set(1)
+    curses.echo()
+    height, _ = screen.getmaxyx()
+    screen.move(height - 2, 0)
+    screen.clrtoeol()
+    screen.addstr(height - 2, 2, text)
+    value = screen.getstr().decode("utf-8", "ignore")
+    curses.noecho()
+    curses.curs_set(0)
+    return value
+
+
+def draw(screen, state: dict, selected: int, message: str) -> None:
+    highlight = curses.color_pair(1) | curses.A_BOLD
+    screen.erase()
+    screen.addstr(1, 2, "WezTerm background", curses.A_BOLD)
+    screen.addstr(2, 2, "up/down select   left/right adjust   enter run   q quit", curses.A_DIM)
+    for index, slider in enumerate(SLIDERS):
+        value = state[slider.key]
+        filled = round(BAR_WIDTH * (value - slider.low) / (slider.high - slider.low))
+        bar = "#" * filled + "-" * (BAR_WIDTH - filled)
+        line = f"{slider.label:<{LABEL_WIDTH}}[{bar}] {value:>4}"
+        marker = "> " if selected == index else "  "
+        screen.addstr(4 + index, 2, marker + line, highlight if selected == index else 0)
+    for offset, label in enumerate(ACTIONS):
+        index = len(SLIDERS) + offset
+        marker = "> " if selected == index else "  "
+        screen.addstr(5 + len(SLIDERS) + offset, 2, marker + label, highlight if selected == index else 0)
+    screen.addstr(6 + len(SLIDERS) + len(ACTIONS), 2, message)
+    screen.refresh()
+
+
+def adjust_slider(screen, state: dict, slider: Slider, direction: int) -> None:
+    state[slider.key] = max(slider.low, min(slider.high, state[slider.key] + direction * slider.step))
+    if slider.bakes_image:
+        draw(screen, state, SLIDERS.index(slider), "Rendering image...")
+        render_image(state)
+    save_state(state)
+
+
+def run_action(screen, state: dict, action: str) -> str:
+    if action == ACTION_CHOOSE_IMAGE:
+        path = prompt(screen, "Image path (drag a file here): ")
+        if not path.strip():
+            return ""
+        set_source_image(path)
+        render_image(state)
+        message = "Image applied."
+    elif action == ACTION_IMPORT_VSCODE:
+        import_vscode(state)
+        render_image(state)
+        message = "Imported image, opacity, blur and grain from VSCode."
+    else:
+        state.update(DEFAULTS)
+        render_image(state)
+        message = "Reset."
+    save_state(state)
+    return message
+
+
+def initialize(state: dict) -> None:
+    if not SOURCE_IMAGE.exists():
+        try:
+            import_vscode(state)
+        except (OSError, ValueError):
+            pass
+    save_state(state)
+    if SOURCE_IMAGE.exists() and not FINAL_IMAGE.exists():
+        render_image(state)
+
+
+def main(screen) -> None:
+    curses.curs_set(0)
+    curses.use_default_colors()
+    curses.init_pair(1, curses.COLOR_CYAN, -1)
+    state = load_state()
+    initialize(state)
+
+    selected, message = 0, ""
+    total = len(SLIDERS) + len(ACTIONS)
+    while True:
+        draw(screen, state, selected, message)
+        message = ""
+        key = screen.getch()
+        if key in KEYS_QUIT:
+            return
+        if key == curses.KEY_UP:
+            selected = (selected - 1) % total
+        elif key == curses.KEY_DOWN:
+            selected = (selected + 1) % total
+        elif key in (curses.KEY_LEFT, curses.KEY_RIGHT) and selected < len(SLIDERS):
+            adjust_slider(screen, state, SLIDERS[selected], 1 if key == curses.KEY_RIGHT else -1)
+        elif key in KEYS_ENTER and selected >= len(SLIDERS):
+            action = ACTIONS[selected - len(SLIDERS)]
+            if action == ACTION_QUIT:
+                return
+            try:
+                message = run_action(screen, state, action)
+            except (OSError, ValueError) as error:
+                message = f"Failed: {error}"
+
+
+if __name__ == "__main__":
+    curses.wrapper(main)

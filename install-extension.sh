@@ -7,6 +7,9 @@ EXT_DIR="$VSCODE_DIR/extensions/ptdung.bg-effects-0.1.0"
 
 mkdir -p "$VSCODE_DIR"
 sed "s|{{HOME}}|$HOME|g" "$SCRIPT_DIR/config/custom.css" > "$VSCODE_DIR/custom.css"
+if [ -f "$SCRIPT_DIR/config/local.css" ]; then
+    sed "s|{{HOME}}|$HOME|g" "$SCRIPT_DIR/config/local.css" >> "$VSCODE_DIR/custom.css"
+fi
 cp "$SCRIPT_DIR/config/bg_controller.js" "$SCRIPT_DIR/config/webview.css" "$VSCODE_DIR/"
 
 rm -rf "$EXT_DIR"
